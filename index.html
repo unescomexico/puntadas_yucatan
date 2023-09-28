@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <link rel="stylesheet" href="css/filter.css">
+<link rel="stylesheet" href="css/nouislider.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title>Bordado en Yucatán</title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="js/tailDT.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/wNumb.js"></script>
+        <script src="data/Lmitedelestado_1.js"></script>
+        <script src="data/MunicipiosdeYucatn_2.js"></script>
+        <script src="data/MunicipiosArteTextil_3.js"></script>
+        <script src="data/Poblacinpormunicipio_4.js"></script>
+        <script src="data/Cluster_5.js"></script>
+        <script src="data/Puntadasdebordado_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[19.068895566593405,-91.09097011916953],[21.566371877996513,-86.90100396597582]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_Mapabase_0');
+        map.getPane('pane_Mapabase_0').style.zIndex = 400;
+        var layer_Mapabase_0 = L.tileLayer('https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            pane: 'pane_Mapabase_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+        });
+        layer_Mapabase_0;
+        map.addLayer(layer_Mapabase_0);
+        function pop_Lmitedelestado_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">CVEGEO</th>\
+                        <td>' + (feature.properties['CVEGEO'] !== null ? autolinker.link(feature.properties['CVEGEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CVE_ENT</th>\
+                        <td>' + (feature.properties['CVE_ENT'] !== null ? autolinker.link(feature.properties['CVE_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMGEO</th>\
+                        <td>' + (feature.properties['NOMGEO'] !== null ? autolinker.link(feature.properties['NOMGEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Lmitedelestado_1_0() {
+            return {
+                pane: 'pane_Lmitedelestado_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Lmitedelestado_1');
+        map.getPane('pane_Lmitedelestado_1').style.zIndex = 401;
+        map.getPane('pane_Lmitedelestado_1').style['mix-blend-mode'] = 'normal';
+        var layer_Lmitedelestado_1 = new L.geoJson(json_Lmitedelestado_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Lmitedelestado_1',
+            layerName: 'layer_Lmitedelestado_1',
+            pane: 'pane_Lmitedelestado_1',
+            onEachFeature: pop_Lmitedelestado_1,
+            style: style_Lmitedelestado_1_0,
+        });
+        bounds_group.addLayer(layer_Lmitedelestado_1);
+        map.addLayer(layer_Lmitedelestado_1);
+        function pop_MunicipiosdeYucatn_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">OID</th>\
+                        <td>' + (feature.properties['OID'] !== null ? autolinker.link(feature.properties['OID'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CVEGEO</th>\
+                        <td>' + (feature.properties['CVEGEO'] !== null ? autolinker.link(feature.properties['CVEGEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CVE_ENT</th>\
+                        <td>' + (feature.properties['CVE_ENT'] !== null ? autolinker.link(feature.properties['CVE_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOM_ENT</th>\
+                        <td>' + (feature.properties['NOM_ENT'] !== null ? autolinker.link(feature.properties['NOM_ENT'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">CVE_MUN</th>\
+                        <td>' + (feature.properties['CVE_MUN'] !== null ? autolinker.link(feature.properties['CVE_MUN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">NOMGEO</th>\
+                        <td>' + (feature.properties['NOMGEO'] !== null ? autolinker.link(feature.properties['NOMGEO'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MunicipiosdeYucatn_2_0() {
+            return {
+                pane: 'pane_MunicipiosdeYucatn_2',
+                opacity: 1,
+                color: 'rgba(118,118,118,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MunicipiosdeYucatn_2');
+        map.getPane('pane_MunicipiosdeYucatn_2').style.zIndex = 402;
+        map.getPane('pane_MunicipiosdeYucatn_2').style['mix-blend-mode'] = 'normal';
+        var layer_MunicipiosdeYucatn_2 = new L.geoJson(json_MunicipiosdeYucatn_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MunicipiosdeYucatn_2',
+            layerName: 'layer_MunicipiosdeYucatn_2',
+            pane: 'pane_MunicipiosdeYucatn_2',
+            onEachFeature: pop_MunicipiosdeYucatn_2,
+            style: style_MunicipiosdeYucatn_2_0,
+        });
+        bounds_group.addLayer(layer_MunicipiosdeYucatn_2);
+        map.addLayer(layer_MunicipiosdeYucatn_2);
+        function pop_MunicipiosArteTextil_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pob</th>\
+                        <td>' + (feature.properties['Pob'] !== null ? autolinker.link(feature.properties['Pob'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Talleres</th>\
+                        <td>' + (feature.properties['Talleres'] !== null ? autolinker.link(feature.properties['Talleres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MunicipiosArteTextil_3_0() {
+            return {
+                pane: 'pane_MunicipiosArteTextil_3',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 2.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MunicipiosArteTextil_3');
+        map.getPane('pane_MunicipiosArteTextil_3').style.zIndex = 403;
+        map.getPane('pane_MunicipiosArteTextil_3').style['mix-blend-mode'] = 'normal';
+        var layer_MunicipiosArteTextil_3 = new L.geoJson(json_MunicipiosArteTextil_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MunicipiosArteTextil_3',
+            layerName: 'layer_MunicipiosArteTextil_3',
+            pane: 'pane_MunicipiosArteTextil_3',
+            onEachFeature: pop_MunicipiosArteTextil_3,
+            style: style_MunicipiosArteTextil_3_0,
+        });
+        bounds_group.addLayer(layer_MunicipiosArteTextil_3);
+        map.addLayer(layer_MunicipiosArteTextil_3);
+        function pop_Poblacinpormunicipio_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Clave</th>\
+                        <td>' + (feature.properties['Clave'] !== null ? autolinker.link(feature.properties['Clave'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nombre</th>\
+                        <td>' + (feature.properties['Nombre'] !== null ? autolinker.link(feature.properties['Nombre'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pob</th>\
+                        <td>' + (feature.properties['Pob'] !== null ? autolinker.link(feature.properties['Pob'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Talleres</th>\
+                        <td>' + (feature.properties['Talleres'] !== null ? autolinker.link(feature.properties['Talleres'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Poblacinpormunicipio_4_0(feature) {
+            if (feature.properties['Pob'] >= 5854.000000 && feature.properties['Pob'] <= 20000.000000 ) {
+                return {
+                pane: 'pane_Poblacinpormunicipio_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,236,255,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Pob'] >= 20000.000000 && feature.properties['Pob'] <= 40000.000000 ) {
+                return {
+                pane: 'pane_Poblacinpormunicipio_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,204,242,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Pob'] >= 40000.000000 && feature.properties['Pob'] <= 60000.000000 ) {
+                return {
+                pane: 'pane_Poblacinpormunicipio_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(108,172,228,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Pob'] >= 60000.000000 && feature.properties['Pob'] <= 80000.000000 ) {
+                return {
+                pane: 'pane_Poblacinpormunicipio_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(54,140,215,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['Pob'] >= 80000.000000 && feature.properties['Pob'] <= 85460.000000 ) {
+                return {
+                pane: 'pane_Poblacinpormunicipio_4',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(1,108,201,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_Poblacinpormunicipio_4');
+        map.getPane('pane_Poblacinpormunicipio_4').style.zIndex = 404;
+        map.getPane('pane_Poblacinpormunicipio_4').style['mix-blend-mode'] = 'normal';
+        var layer_Poblacinpormunicipio_4 = new L.geoJson(json_Poblacinpormunicipio_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Poblacinpormunicipio_4',
+            layerName: 'layer_Poblacinpormunicipio_4',
+            pane: 'pane_Poblacinpormunicipio_4',
+            onEachFeature: pop_Poblacinpormunicipio_4,
+            style: style_Poblacinpormunicipio_4_0,
+        });
+        bounds_group.addLayer(layer_Poblacinpormunicipio_4);
+        map.addLayer(layer_Poblacinpormunicipio_4);
+        function pop_Cluster_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Puntadas</th>\
+                        <td>' + (feature.properties['Puntadas'] !== null ? autolinker.link(feature.properties['Puntadas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clase</th>\
+                        <td>' + (feature.properties['Clase'] !== null ? autolinker.link(feature.properties['Clase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['Municipio'] !== null ? autolinker.link(feature.properties['Municipio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coord X</th>\
+                        <td>' + (feature.properties['Coord X'] !== null ? autolinker.link(feature.properties['Coord X'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coord Y</th>\
+                        <td>' + (feature.properties['Coord Y'] !== null ? autolinker.link(feature.properties['Coord Y'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Cluster_5_0() {
+            return {
+                pane: 'pane_Cluster_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(215,90,119,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,90,119,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Cluster_5');
+        map.getPane('pane_Cluster_5').style.zIndex = 405;
+        map.getPane('pane_Cluster_5').style['mix-blend-mode'] = 'normal';
+        var layer_Cluster_5 = new L.geoJson(json_Cluster_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Cluster_5',
+            layerName: 'layer_Cluster_5',
+            pane: 'pane_Cluster_5',
+            onEachFeature: pop_Cluster_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Cluster_5_0(feature));
+            },
+        });
+        var cluster_Cluster_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Cluster_5.addLayer(layer_Cluster_5);
+
+        bounds_group.addLayer(layer_Cluster_5);
+        cluster_Cluster_5.addTo(map);
+        function pop_Puntadasdebordado_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Puntadas</th>\
+                        <td>' + (feature.properties['Puntadas'] !== null ? autolinker.link(feature.properties['Puntadas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tipo</th>\
+                        <td>' + (feature.properties['Tipo'] !== null ? autolinker.link(feature.properties['Tipo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Clase</th>\
+                        <td>' + (feature.properties['Clase'] !== null ? autolinker.link(feature.properties['Clase'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Municipio</th>\
+                        <td>' + (feature.properties['Municipio'] !== null ? autolinker.link(feature.properties['Municipio'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coord X</th>\
+                        <td>' + (feature.properties['Coord X'] !== null ? autolinker.link(feature.properties['Coord X'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Coord Y</th>\
+                        <td>' + (feature.properties['Coord Y'] !== null ? autolinker.link(feature.properties['Coord Y'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Puntadasdebordado_6_0(feature) {
+            switch(String(feature.properties['Clase'])) {
+                case 'Fantasía':
+                    return {
+                pane: 'pane_Puntadasdebordado_6',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(215,90,119,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,90,119,0.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Mano':
+                    return {
+                pane: 'pane_Puntadasdebordado_6',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(251,153,248,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(180,208,102,0.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Maquina':
+                    return {
+                pane: 'pane_Puntadasdebordado_6',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(255,175,1,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 5.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,102,113,0.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Puntadasdebordado_6');
+        map.getPane('pane_Puntadasdebordado_6').style.zIndex = 406;
+        map.getPane('pane_Puntadasdebordado_6').style['mix-blend-mode'] = 'normal';
+        var layer_Puntadasdebordado_6 = new L.geoJson(json_Puntadasdebordado_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Puntadasdebordado_6',
+            layerName: 'layer_Puntadasdebordado_6',
+            pane: 'pane_Puntadasdebordado_6',
+            onEachFeature: pop_Puntadasdebordado_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Puntadasdebordado_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_Puntadasdebordado_6);
+        map.addLayer(layer_Puntadasdebordado_6);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>Bordado en Yucatán</h2>';
+            };
+            title.addTo(map);
+            var abstract = new L.Control({'position':'topright'});
+            abstract.onAdd = function (map) {
+                this._div = L.DomUtil.create('div',
+                'leaflet-control abstract');
+                this._div.id = 'abstract'
+
+                    abstract.show();
+                    return this._div;
+                };
+                abstract.show = function () {
+                    this._div.classList.remove("abstract");
+                    this._div.classList.add("abstractUncollapsed");
+                    this._div.innerHTML = 'Tipos de puntada';
+            };
+            abstract.addTo(map);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Puntadas de bordado<br /><table><tr><td style="text-align: center;"><img src="legend/Puntadasdebordado_6_Fantasía0.png" /></td><td>Fantasía</td></tr><tr><td style="text-align: center;"><img src="legend/Puntadasdebordado_6_Mano1.png" /></td><td>Mano</td></tr><tr><td style="text-align: center;"><img src="legend/Puntadasdebordado_6_Maquina2.png" /></td><td>Maquina</td></tr></table>': layer_Puntadasdebordado_6,'<img src="legend/Cluster_5.png" /> Cluster': cluster_Cluster_5,'Población por municipio<br /><table><tr><td style="text-align: center;"><img src="legend/Poblacinpormunicipio_4_5854200000.png" /></td><td>5854 - 20000</td></tr><tr><td style="text-align: center;"><img src="legend/Poblacinpormunicipio_4_20000400001.png" /></td><td>20000 - 40000</td></tr><tr><td style="text-align: center;"><img src="legend/Poblacinpormunicipio_4_40000600002.png" /></td><td>40000 - 60000</td></tr><tr><td style="text-align: center;"><img src="legend/Poblacinpormunicipio_4_60000800003.png" /></td><td>60000 - 80000</td></tr><tr><td style="text-align: center;"><img src="legend/Poblacinpormunicipio_4_80000854604.png" /></td><td>80000 - 85460</td></tr></table>': layer_Poblacinpormunicipio_4,'<img src="legend/MunicipiosArteTextil_3.png" /> Municipios Arte Textil': layer_MunicipiosArteTextil_3,'<img src="legend/MunicipiosdeYucatn_2.png" /> Municipios de Yucatán': layer_MunicipiosdeYucatn_2,'<img src="legend/Lmitedelestado_1.png" /> Límite del estado': layer_Lmitedelestado_1,"Mapa base": layer_Mapabase_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_Puntadasdebordado_6,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'Puntadas'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        var mapDiv = document.getElementById('map');
+        var row = document.createElement('div');
+        row.className="row";
+        row.id="all";
+        row.style.height = "100%";
+        var col1 = document.createElement('div');
+        col1.className="col9";
+        col1.id = "mapWindow";
+        col1.style.height = "99%";
+        col1.style.width = "80%";
+        col1.style.display = "inline-block";
+        var col2 = document.createElement('div');
+        col2.className="col3";
+        col2.id = "menu";
+        col2.style.display = "inline-block";
+        mapDiv.parentNode.insertBefore(row, mapDiv);
+        document.getElementById("all").appendChild(col1);
+        document.getElementById("all").appendChild(col2);
+        col1.appendChild(mapDiv)
+        var Filters = {"Clase": "str","Puntadas": "str"};
+        function filterFunc() {
+          map.eachLayer(function(lyr){
+          if ("options" in lyr && "dataVar" in lyr["options"]){
+            features = this[lyr["options"]["dataVar"]].features.slice(0);
+            try{
+              for (key in Filters){
+                keyS = key.replace(/[^a-zA-Z0-9_]/g, "")
+                if (Filters[key] == "str" || Filters[key] == "bool"){
+                  var selection = [];
+                  var options = document.getElementById("sel_" + keyS).options
+                  for (var i=0; i < options.length; i++) {
+                    if (options[i].selected) selection.push(options[i].value);
+                  }
+                    try{
+                      if (key in features[0].properties){
+                        for (i = features.length - 1;
+                          i >= 0; --i){
+                          if (selection.indexOf(
+                          features[i].properties[key])<0
+                          && selection.length>0) {
+                          features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                  }
+                }
+                if (Filters[key] == "int"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (parseInt(features[i].properties[key])
+                          < sliderVals[0]
+                          || parseInt(features[i].properties[key])
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "real"){
+                  sliderVals =  document.getElementById(
+                    "div_" + keyS).noUiSlider.get();
+                  try{
+                    if (key in features[0].properties){
+                    for (i = features.length - 1; i >= 0; --i){
+                      if (features[i].properties[key]
+                          < sliderVals[0]
+                          || features[i].properties[key]
+                          > sliderVals[1]){
+                            features.splice(i,1);
+                          }
+                        }
+                      }
+                    } catch(err){
+                    }
+                  }
+                if (Filters[key] == "date"
+                  || Filters[key] == "datetime"
+                  || Filters[key] == "time"){
+                  try{
+                    if (key in features[0].properties){
+                      HTMLkey = key.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g, '');
+                      startdate = document.getElementById("dat_" +
+                        HTMLkey + "_date1").value.replace(" ", "T");
+                      enddate = document.getElementById("dat_" +
+                        HTMLkey + "_date2").value.replace(" ", "T");
+                      for (i = features.length - 1; i >= 0; --i){
+                        if (features[i].properties[key] < startdate
+                          || features[i].properties[key] > enddate){
+                          features.splice(i,1);
+                        }
+                      }
+                    }
+                  } catch(err){
+                  }
+                }
+              }
+            } catch(err){
+            }
+          this[lyr["options"]["layerName"]].clearLayers();
+          this[lyr["options"]["layerName"]].addData(features);
+          }
+          })
+        }
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Clase = document.createElement('div');
+            div_Clase.id = "div_Clase";
+            div_Clase.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Clase);
+            sel_Clase = document.createElement('select');
+            sel_Clase.multiple = true;
+            sel_Clase.size = 3;
+            sel_Clase.id = "sel_Clase";
+            var Clase_options_str = "<option value='' unselected></option>";
+            sel_Clase.onchange = function(){filterFunc()};
+            Clase_options_str  += '<option value="Fantasía">Fantasía</option>';
+            Clase_options_str  += '<option value="Mano">Mano</option>';
+            Clase_options_str  += '<option value="Maquina">Maquina</option>';
+            sel_Clase.innerHTML = Clase_options_str;
+            div_Clase.appendChild(sel_Clase);
+            var lab_Clase = document.createElement('div');
+            lab_Clase.innerHTML = 'Clase';
+            lab_Clase.className = 'filterlabel';
+            div_Clase.appendChild(lab_Clase);
+            var reset_Clase = document.createElement('div');
+            reset_Clase.innerHTML = 'clear filter';
+            reset_Clase.className = 'filterlabel';
+            reset_Clase.onclick = function() {
+                var options = document.getElementById("sel_Clase").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Clase.appendChild(reset_Clase);
+            document.getElementById("menu").appendChild(
+                document.createElement("div"));
+            var div_Puntadas = document.createElement('div');
+            div_Puntadas.id = "div_Puntadas";
+            div_Puntadas.className= "filterselect";
+            document.getElementById("menu").appendChild(div_Puntadas);
+            sel_Puntadas = document.createElement('select');
+            sel_Puntadas.multiple = true;
+            sel_Puntadas.size = 10;
+            sel_Puntadas.id = "sel_Puntadas";
+            var Puntadas_options_str = "<option value='' unselected></option>";
+            sel_Puntadas.onchange = function(){filterFunc()};
+            Puntadas_options_str  += '<option value="Al revés chuy">Al revés chuy</option>';
+            Puntadas_options_str  += '<option value="Allca bichuy">Allca bichuy</option>';
+            Puntadas_options_str  += '<option value="Calado">Calado</option>';
+            Puntadas_options_str  += '<option value="Caminado">Caminado</option>';
+            Puntadas_options_str  += '<option value="Celosia">Celosia</option>';
+            Puntadas_options_str  += '<option value="Chuuy Kab">Chuuy Kab</option>';
+            Puntadas_options_str  += '<option value="Cinta chuuy">Cinta chuuy</option>';
+            Puntadas_options_str  += '<option value="Claros">Claros</option>';
+            Puntadas_options_str  += '<option value="Contorno">Contorno</option>';
+            Puntadas_options_str  += '<option value="Corrido">Corrido</option>';
+            Puntadas_options_str  += '<option value="Cortada renacimiento">Cortada renacimiento</option>';
+            Puntadas_options_str  += '<option value="Cortado">Cortado</option>';
+            Puntadas_options_str  += '<option value="Costilla de ratón">Costilla de ratón</option>';
+            Puntadas_options_str  += '<option value="Diente de perro">Diente de perro</option>';
+            Puntadas_options_str  += '<option value="Flor de cocó">Flor de cocó</option>';
+            Puntadas_options_str  += '<option value="Gripur">Gripur</option>';
+            Puntadas_options_str  += '<option value="Hilo Contado">Hilo Contado</option>';
+            Puntadas_options_str  += '<option value="Hilo contado">Hilo contado</option>';
+            Puntadas_options_str  += '<option value="Hilvan y bastilla">Hilvan y bastilla</option>';
+            Puntadas_options_str  += '<option value="Hitbi chuy (trenza">Hitbi chuy (trenza</option>';
+            Puntadas_options_str  += '<option value="Jaas Chuy">Jaas Chuy</option>';
+            Puntadas_options_str  += '<option value="Jaspeado">Jaspeado</option>';
+            Puntadas_options_str  += '<option value="Kaakalot">Kaakalot</option>';
+            Puntadas_options_str  += '<option value="Kaakape o kaakapeoch">Kaakape o kaakapeoch</option>';
+            Puntadas_options_str  += '<option value="Kaakape och">Kaakape och</option>';
+            Puntadas_options_str  += '<option value="Lé subin">Lé subin</option>';
+            Puntadas_options_str  += '<option value="Macizo">Macizo</option>';
+            Puntadas_options_str  += '<option value="Macizo a mano (chuuy kab)">Macizo a mano (chuuy kab)</option>';
+            Puntadas_options_str  += '<option value="Macizo corrugado">Macizo corrugado</option>';
+            Puntadas_options_str  += '<option value="Macizo en línea">Macizo en línea</option>';
+            Puntadas_options_str  += '<option value="Macizo pespunteado">Macizo pespunteado</option>';
+            Puntadas_options_str  += '<option value="Macizo y sombreado">Macizo y sombreado</option>';
+            Puntadas_options_str  += '<option value="Mol miss">Mol miss</option>';
+            Puntadas_options_str  += '<option value="Moloch">Moloch</option>';
+            Puntadas_options_str  += '<option value="Morisca">Morisca</option>';
+            Puntadas_options_str  += '<option value="Nipude">Nipude</option>';
+            Puntadas_options_str  += '<option value="Nudo francés">Nudo francés</option>';
+            Puntadas_options_str  += '<option value="Ojal">Ojal</option>';
+            Puntadas_options_str  += '<option value="Otras">Otras</option>';
+            Puntadas_options_str  += '<option value="Panal">Panal</option>';
+            Puntadas_options_str  += '<option value="Panel">Panel</option>';
+            Puntadas_options_str  += '<option value="Pata de cabra">Pata de cabra</option>';
+            Puntadas_options_str  += '<option value="Pespunte">Pespunte</option>';
+            Puntadas_options_str  += '<option value="Petatillo">Petatillo</option>';
+            Puntadas_options_str  += '<option value="Puntada abaníco">Puntada abaníco</option>';
+            Puntadas_options_str  += '<option value="Puntada corrida">Puntada corrida</option>';
+            Puntadas_options_str  += '<option value="Puntada corrugada">Puntada corrugada</option>';
+            Puntadas_options_str  += '<option value="Puntada corta">Puntada corta</option>';
+            Puntadas_options_str  += '<option value="Puntada cretese">Puntada cretese</option>';
+            Puntadas_options_str  += '<option value="Puntada de cordón">Puntada de cordón</option>';
+            Puntadas_options_str  += '<option value="Puntada escama">Puntada escama</option>';
+            Puntadas_options_str  += '<option value="Puntada espina pescado">Puntada espina pescado</option>';
+            Puntadas_options_str  += '<option value="Puntada fantasía">Puntada fantasía</option>';
+            Puntadas_options_str  += '<option value="Puntada festón">Puntada festón</option>';
+            Puntadas_options_str  += '<option value="Puntada gusanito">Puntada gusanito</option>';
+            Puntadas_options_str  += '<option value="Puntada larga">Puntada larga</option>';
+            Puntadas_options_str  += '<option value="Puntada largo y corto">Puntada largo y corto</option>';
+            Puntadas_options_str  += '<option value="Puntada lazo">Puntada lazo</option>';
+            Puntadas_options_str  += '<option value="Puntada margarita">Puntada margarita</option>';
+            Puntadas_options_str  += '<option value="Puntada mosca">Puntada mosca</option>';
+            Puntadas_options_str  += '<option value="Puntada palestina">Puntada palestina</option>';
+            Puntadas_options_str  += '<option value="Puntada petatillo">Puntada petatillo</option>';
+            Puntadas_options_str  += '<option value="Puntada real">Puntada real</option>';
+            Puntadas_options_str  += '<option value="Puntada relleno">Puntada relleno</option>';
+            Puntadas_options_str  += '<option value="Puntada relleno simple">Puntada relleno simple</option>';
+            Puntadas_options_str  += '<option value="Puntada rococó">Puntada rococó</option>';
+            Puntadas_options_str  += '<option value="Puntada telaraña">Puntada telaraña</option>';
+            Puntadas_options_str  += '<option value="Punto atrás">Punto atrás</option>';
+            Puntadas_options_str  += '<option value="Punto cadena">Punto cadena</option>';
+            Puntadas_options_str  += '<option value="Punto de cadeneta">Punto de cadeneta</option>';
+            Puntadas_options_str  += '<option value="Punto de corrido">Punto de corrido</option>';
+            Puntadas_options_str  += '<option value="Punto de cruz">Punto de cruz</option>';
+            Puntadas_options_str  += '<option value="Punto de espiga">Punto de espiga</option>';
+            Puntadas_options_str  += '<option value="Punto de ojal">Punto de ojal</option>';
+            Puntadas_options_str  += '<option value="Punto de red">Punto de red</option>';
+            Puntadas_options_str  += '<option value="Punto de sombra">Punto de sombra</option>';
+            Puntadas_options_str  += '<option value="Punto de tambor">Punto de tambor</option>';
+            Puntadas_options_str  += '<option value="Punto esmock">Punto esmock</option>';
+            Puntadas_options_str  += '<option value="Punto español">Punto español</option>';
+            Puntadas_options_str  += '<option value="Punto estrella">Punto estrella</option>';
+            Puntadas_options_str  += '<option value="Punto festón">Punto festón</option>';
+            Puntadas_options_str  += '<option value="Punto helecho">Punto helecho</option>';
+            Puntadas_options_str  += '<option value="Punto hilban">Punto hilban</option>';
+            Puntadas_options_str  += '<option value="Punto margarita">Punto margarita</option>';
+            Puntadas_options_str  += '<option value="Punto ojal">Punto ojal</option>';
+            Puntadas_options_str  += '<option value="Punto partido">Punto partido</option>';
+            Puntadas_options_str  += '<option value="Punto pluma">Punto pluma</option>';
+            Puntadas_options_str  += '<option value="Punto recto">Punto recto</option>';
+            Puntadas_options_str  += '<option value="Punto relleno">Punto relleno</option>';
+            Puntadas_options_str  += '<option value="Punto sombreado">Punto sombreado</option>';
+            Puntadas_options_str  += '<option value="Punto tambor">Punto tambor</option>';
+            Puntadas_options_str  += '<option value="Punto yugoslavo">Punto yugoslavo</option>';
+            Puntadas_options_str  += '<option value="Regía">Regía</option>';
+            Puntadas_options_str  += '<option value="Rejilla">Rejilla</option>';
+            Puntadas_options_str  += '<option value="Rejilla o deshilado">Rejilla o deshilado</option>';
+            Puntadas_options_str  += '<option value="Relleno corrugado">Relleno corrugado</option>';
+            Puntadas_options_str  += '<option value="Relleno macizo">Relleno macizo</option>';
+            Puntadas_options_str  += '<option value="Renacimiento">Renacimiento</option>';
+            Puntadas_options_str  += '<option value="Richiliu">Richiliu</option>';
+            Puntadas_options_str  += '<option value="San Antonino">San Antonino</option>';
+            Puntadas_options_str  += '<option value="Sombreado">Sombreado</option>';
+            Puntadas_options_str  += '<option value="Trencilla rellenas">Trencilla rellenas</option>';
+            Puntadas_options_str  += '<option value="Trenza">Trenza</option>';
+            Puntadas_options_str  += '<option value="Xmanikté">Xmanikté</option>';
+            Puntadas_options_str  += '<option value="Xocbichuy">Xocbichuy</option>';
+            sel_Puntadas.innerHTML = Puntadas_options_str;
+            div_Puntadas.appendChild(sel_Puntadas);
+            var lab_Puntadas = document.createElement('div');
+            lab_Puntadas.innerHTML = 'Puntadas';
+            lab_Puntadas.className = 'filterlabel';
+            div_Puntadas.appendChild(lab_Puntadas);
+            var reset_Puntadas = document.createElement('div');
+            reset_Puntadas.innerHTML = 'clear filter';
+            reset_Puntadas.className = 'filterlabel';
+            reset_Puntadas.onclick = function() {
+                var options = document.getElementById("sel_Puntadas").options;
+                for (var i=0; i < options.length; i++) {
+                    options[i].selected = false;
+                }
+                filterFunc();
+            };
+            div_Puntadas.appendChild(reset_Puntadas);
+        </script>
+    </body>
+</html>
